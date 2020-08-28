@@ -4,6 +4,7 @@ set -e
 
 # build bin file
 export GO111MODULE=on
+export GOPROXY=https://goproxy.io
 make
 
 # make my dir
