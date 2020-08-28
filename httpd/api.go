@@ -788,7 +788,7 @@ func (s *Service) handlerResourceAdd(w http.ResponseWriter, r *http.Request, _ h
 // TODO: return only or preperty ns or some property of resource from res.
 func (s *Service) handlerSearch(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	s.logger.Infof("start")
-)	ns := r.FormValue("ns")
+	ns := r.FormValue("ns")
 	resType := r.FormValue("type")
 	k := r.FormValue("k")
 	v := r.FormValue("v")
