@@ -811,7 +811,8 @@ func (s *Service) handlerSearch(w http.ResponseWriter, r *http.Request, _ httpro
 	if resType == "deploy" {
 		for k := range res {
 			s.logger.Infof("k info",k)
-			if ok, _ := s.perm.Check(r.Header.Get(`UID`), k, resType, r.Method, "/api/v1/resource"); !ok {
+			if ok, err := s.perm.Check(r.Header.Get(`UID`), k, resType, r.Method, "/api/v1/resource"); !ok {
+				s.logger.Infof("why",err)
 				delete(res, k)
 			}
 		}
