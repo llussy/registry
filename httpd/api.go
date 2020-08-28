@@ -804,10 +804,12 @@ func (s *Service) handlerSearch(w http.ResponseWriter, r *http.Request, _ httpro
 		ReturnServerError(w, err)
 		return
 	}
+	s.logger.Debugf("res info",res)
 
 	// check deploy result
 	if resType == "deploy" {
 		for k := range res {
+			s.logger.Debugf("k info",k)
 			if ok, _ := s.perm.Check(r.Header.Get(`UID`), k, resType, r.Method, "/api/v1/resource"); !ok {
 				delete(res, k)
 			}
