@@ -787,7 +787,8 @@ func (s *Service) handlerResourceAdd(w http.ResponseWriter, r *http.Request, _ h
 // search bucket by nodes/key(resource)/resource_property
 // TODO: return only or preperty ns or some property of resource from res.
 func (s *Service) handlerSearch(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	ns := r.FormValue("ns")
+	s.logger.Infof("start")
+)	ns := r.FormValue("ns")
 	resType := r.FormValue("type")
 	k := r.FormValue("k")
 	v := r.FormValue("v")
@@ -804,12 +805,12 @@ func (s *Service) handlerSearch(w http.ResponseWriter, r *http.Request, _ httpro
 		ReturnServerError(w, err)
 		return
 	}
-	s.logger.Debugf("res info",res)
+	s.logger.Infof("res info",res)
 
 	// check deploy result
 	if resType == "deploy" {
 		for k := range res {
-			s.logger.Debugf("k info",k)
+			s.logger.Infof("k info",k)
 			if ok, _ := s.perm.Check(r.Header.Get(`UID`), k, resType, r.Method, "/api/v1/resource"); !ok {
 				delete(res, k)
 			}
